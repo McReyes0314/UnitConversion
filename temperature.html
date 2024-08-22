@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script>
+        function calculateValue() {
+            var tempt = parseFloat(document.getElementById("tempdata").value); 
+            var convertTo = document.getElementById("ConvertTo").value;
+            var convertFrom = document.getElementById("ConvertFrom").value;
+            var result = 0; 
+            if(convertTo == "C"){
+                if(convertFrom == "F"){
+                    result = ((9/5 * tempt) + 32).toFixed; 
+                }
+                else if(convertFrom == "K"){
+                    result = (273.15 + tempt).toFixed(2); 
+                }
+                else{
+                    result = tempt;
+                }
+            } else if(convertTo == "F"){
+                if(convertFrom == "C"){
+                    result = ((5/9 * (tempt - 32))).toFixed(2);
+                }
+                else if(convertFrom == "K"){
+                    result = ((5/9 * (tempt - 32)) + 273.15).toFixed(2);
+                }
+                else{
+                    result = tempt;
+                }
+            } else if(convertTo == "K") {
+                if(convertFrom == 'C'){
+                    result = (tempt - 273.15).toFixed(2); 
+                } 
+                else if(convertFrom == 'F') {
+                    result = ((9/5 * (tempt - 273.15)) + 32).toFixed(2);
+                } else {
+                    result = tempt;
+                }
+            }
+            document.getElementById("result").innerHTML = "Result of your calculation: " + result;
+        }
+
+        function resetValue() {
+            document.getElementById("tempdata").value = ""; // Corrected to reset the value
+            document.getElementById("result").innerHTML = "";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h2>Unit Converter</h2>
+        <div class="nav">
+            <a href="length.html">Length</a>
+            <a href="weight.html">Weight</a>
+            <a href="temperature.html">Temperature</a>
+        </div>
+    </header>
+    <main>
+       <div class="converter">
+            <div>
+                <label for="tempData">Enter the temperature to convert</label><br>
+                <input type="number" id="tempdata"><br>
+            </div>
+            <div>
+                <label for="ConvertTo">Unit to Convert to</label><br>
+                <select id="ConvertTo">
+                    <option value="C">Degree celsius (C)</option>
+                    <option value="F">Fahrenheit (F)</option>
+                    <option value="K">Kelvin (K)</option>
+                </select>
+            </div>
+            <div>
+                <label for="ConvertFrom">Unit to Convert from</label><br>
+                <select id="ConvertFrom">
+                    <option value="C">Degree celsius (C)</option>
+                    <option value="F">Fahrenheit (F)</option>
+                    <option value="K">Kelvin (K)</option>
+                </select>
+            </div>
+            <button type="button" onclick="calculateValue()">Convert</button>
+            <button type="button" onclick="resetValue()">Reset</button>
+            <p id="result"></p>
+       </div>
+    </main>
+    <footer></footer>
+</body>
+</html>

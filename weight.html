@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script>
+        function resetValue() {
+            document.getElementById("mass").value = "";
+            document.getElementById("result").innerHTML = "";
+        }
+
+        function convert() {
+            var mass = parseFloat(document.getElementById("mass").value);
+            var convertTo = document.getElementById("ConvertTo").value;
+            var convertFrom = document.getElementById("ConvertFrom").value;
+            var result = 0;
+
+            var conversionFactors = {
+                t: { kg: 1000, g: 1000000, mg: 1000000000, µg: 1000000000000, ton: 1.016, lb: 2204.62, oz: 35274 },
+                kg: { t: 0.001, g: 1000, mg: 1000000, µg: 1000000000, ton: 0.00110231, lb: 2.20462, oz: 35.274 },
+                g: { t: 0.000001, kg: 0.001, mg: 1000, µg: 1000000, ton: 0.00000110231, lb: 0.00220462, oz: 0.035274 },
+                mg: { t: 0.000000001, kg: 0.000001, g: 0.001, µg: 1000, ton: 0.00000000110231, lb: 0.00000220462, oz: 0.000035274 },
+                µg: { t: 0.000000000001, kg: 0.000000001, g: 0.000001, mg: 0.001, ton: 0.00000000000110231, lb: 0.00000000220462, oz: 0.000000035274 },
+                ton: { t: 0.984207, kg: 1016.05, g: 1016050, mg: 1016050000, µg: 1016050000000, lb: 2240, oz: 35840 },
+                lb: { t: 0.000453592, kg: 0.453592, g: 453.592, mg: 453592, µg: 453592370, ton: 0.000446429, oz: 16 },
+                oz: { t: 0.0000283495, kg: 0.0283495, g: 28.3495, mg: 28349.5, µg: 28349523, ton: 0.0000279017, lb: 0.0625 }
+            };
+
+            if (convertFrom !== convertTo) {
+                result = (mass * conversionFactors[convertFrom][convertTo]).toFixed(2);
+            } else {
+                result = mass.toFixed(2);
+            }
+
+            document.getElementById("result").innerHTML = "Result of your calculation: " + result;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h2>Unit Converter</h2>
+        <div class="nav">
+            <a href="length.html">Length</a>
+            <a href="weight.html">Weight</a>
+            <a href="temperature.html">Temperature</a>
+        </div>
+    </header>
+    <main class="converter">
+        <div>
+            <div>
+                <label for="mass">Enter the weight to convert</label><br>
+                <input type="number" id="mass"><br>
+            </div>
+            <div>
+                <label for="ConvertTo">Unit to Convert to</label><br>
+                <select id="ConvertTo">
+                    <option value="t">Tonne (t)</option>
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="g">Gram (g)</option>
+                    <option value="mg">Milligram (mg)</option>
+                    <option value="µg">Microgram (µg)</option>
+                    <option value="ton">Ton (ton)</option>
+                    <option value="lb">Pound (lb)</option>
+                    <option value="oz">Ounce (oz)</option>
+                </select>
+            </div>
+            <div>
+                <label for="ConvertFrom">Unit to Convert from</label><br>
+                <select id="ConvertFrom">
+                    <option value="t">Tonne (t)</option>
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="g">Gram (g)</option>
+                    <option value="mg">Milligram (mg)</option>
+                    <option value="µg">Microgram (µg)</option>
+                    <option value="ton">Ton (ton)</option>
+                    <option value="lb">Pound (lb)</option>
+                    <option value="oz">Ounce (oz)</option>
+                </select>
+            </div>
+            <button type="button" onclick="convert()">Convert</button>
+            <button type="button" onclick="resetValue()">Reset</button>
+            <p id="result"></p>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>

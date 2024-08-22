@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script>
+        function resetValue(){
+            document.getElementById("length").value = "";
+            document.getElementById("result").innerHTML = "";
+        }
+
+        function convert(){
+            var length = parseFloat(document.getElementById("length").value); 
+            var convertTo = document.getElementById("ConvertTo").value; 
+            var convertFrom = document.getElementById("ConvertFrom").value;
+            var result = 0; 
+
+            var conversionFactors = {
+                cm: {km: length * 10 ** -5, mm: length * 10, μm: length * 10 ** 4, nm: length * 10 ** 7, mi: length * 6.2137 * 10 ** -6, yd: length * 0.0109361, ft: length * 0.0328084, in: length * 0.393701},
+                km: {cm: length * 10 ** 5, mm: length * 10 ** 6, μm: length * 10 ** 9, nm: length * 10 ** 12, mi: length * 0.621371, yd: length * 1093.61, ft: length * 3280.84, in: length * 39370.1},
+                mm: {cm: length * 0.1, km: length * 10 ** -6, μm: length * 1000, nm: length * 10 ** 6, mi: length * 6.2137 * 10 ** -7, yd: length * 0.00109361, ft: length * 0.00328084, in: length * 0.0393701},
+                μm: {cm: length * 10 ** -4, km: length * 10 ** -9, mm: length * 0.001, nm: length * 1000, mi: length * 6.2137 * 10 ** -10, yd: length * 1.09361 * 10 ** -6, ft: length * 3.28084 * 10 ** -6, in: length * 3.93701 * 10 ** -5},
+                nm: {cm: length * 10 ** -7, km: length * 10 ** -12, mm: length * 10 ** -6, μm: length * 0.001, mi: length * 6.2137 * 10 ** -13, yd: length * 1.09361 * 10 ** -9, ft: length * 3.28084 * 10 ** -9, in: length * 3.93701 * 10 ** -8},
+                mi: {cm: length * 160934, km: length * 1.60934, mm: length * 1.60934 * 10 ** 6, μm: length * 1.60934 * 10 ** 9, nm: length * 1.60934 * 10 ** 12, yd: length * 1760, ft: length * 5280, in: length * 63360},
+                yd: {cm: length * 91.44, km: length * 0.0009144, mm: length * 914.4, μm: length * 914400, nm: length * 9.144 * 10 ** 8, mi: length * 5.68182 * 10 ** -4, ft: length * 3, in: length * 36},
+                ft: {cm: length * 30.48, km: length * 0.0003048, mm: length * 304.8, μm: length * 304800, nm: length * 3.048 * 10 ** 8, mi: length * 1.89394 * 10 ** -4, yd: length / 3, in: length * 12},
+                in: {cm: length * 2.54, km: length * 0.0000254, mm: length * 25.4, μm: length * 25400, nm: length * 2.54 * 10 ** 7, mi: length * 1.57828 * 10 ** -5, yd: length * 0.0277778, ft: length * 0.0833333}
+            };
+
+            // Check if the convertFrom and convertTo units are the same
+            if (convertFrom === convertTo) {
+                result = length;
+            } else {
+                result = conversionFactors[convertFrom][convertTo];
+            }
+
+            document.getElementById("result").innerHTML = "Result of your calculation: " + result;
+        }
+    </script>
+
+    </script>
+</head>
+<body>
+    <header>
+        <h2>Unit Converter</h2>
+        <div class="nav">
+            <a href="length.html">Length</a>
+            <a href="weight.html">Weight</a>
+            <a href="temperature.html">Temperature</a>
+        </div>
+    </header>
+   
+    <main>
+        <div class="converter">
+            <div>
+                <label for="lengthCovert">Enter the length to convert</label><br>
+                <input type="length" id="length"><br>
+            </div>
+                
+            
+            <div>
+                <label for="ConvertTo">Unit to Convert to</label><br>
+                <select id="ConvertTo">
+                    <option value="cm">Centimetre (cm)</option>
+                    <option value="km">Kilometre (km)</option>
+                    <option value="mm">Millimetre (mm)</option>
+                    <option value="μm">Micrometre (μm)</option>
+                    <option value="nm">Nanometer (nm)</option>
+                    <option value="mi">Mile (mi)</option>
+                    <option value="yd">Yard (yd)</option>
+                    <option value="ft">Foot (ft)</option>
+                    <option value="in">Inch (in)</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="ConvertFrom">Unit to Convert from</label><br>
+                <select id="ConvertFrom">
+                    <option value="cm">Centimetre (cm)</option>
+                    <option value="km">Kilometre (km)</option>
+                    <option value="mm">Millimetre (mm)</option>
+                    <option value="μm">Micrometre (μm)</option>
+                    <option value="nm">Nanometer (nm)</option>
+                    <option value="mi">Mile (mi)</option>
+                    <option value="yd">Yard (yd)</option>
+                    <option value="ft">Foot (ft)</option>
+                    <option value="in">Inch (in)</option>
+                </select><br>
+            </div>
+
+            <button type="button" onclick="convert()">Convert</button>
+            <button type="button" onclick="resetValue()">Reset</button>
+            <p id="result"></p>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>
